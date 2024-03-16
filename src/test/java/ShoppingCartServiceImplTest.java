@@ -30,7 +30,7 @@ public class ShoppingCartServiceImplTest {
     }
 
     @Test
-    public void testProcessCheckout_Successful() {
+    public void shouldTestProcessCheckoutWithInvalidCart() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
         CustomerCredentials validCredentials = new CustomerCredentials("example@gmail.com", "password123");
@@ -52,7 +52,7 @@ public class ShoppingCartServiceImplTest {
     }
 
     @Test(expected = CheckoutFailedException.class)
-    public void testProcessCheckout_InvalidCart() {
+    public void shouldTestProcessCheckoutWithInvalidCredentials() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
         CustomerCredentials validCredentials = new CustomerCredentials("example@gmail.com", "password123");
@@ -65,7 +65,7 @@ public class ShoppingCartServiceImplTest {
     }
 
     @Test(expected = CheckoutFailedException.class)
-    public void testProcessCheckout_InvalidCredentials() {
+    public void shouldTestProcessCheckoutSuccess() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
         CustomerCredentials invalidCredentials = new CustomerCredentials("example@yahoo.com", "password123");
