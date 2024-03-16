@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exception.shoppingcartservice.CheckoutFailedException;
 import org.example.model.CustomerCredentials;
 import org.example.model.ShoppingCart;
 
@@ -23,10 +24,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             }
             else {
                 System.out.println("Checkout failed.");
-                return false;
+                throw new CheckoutFailedException("Checkout failed due to invalid credentials");
             }
         }
+        else {
             System.out.println("Checkout failed.");
-        return false;
+            throw new CheckoutFailedException("Checkout failed due to invalid cart");
+        }
     }
+
 }
