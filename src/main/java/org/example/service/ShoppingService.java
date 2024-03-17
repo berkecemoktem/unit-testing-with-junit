@@ -4,7 +4,8 @@ import org.example.model.Product;
 import org.example.model.ShoppingCart;
 import org.example.model.ShoppingCartItem;
 
-public interface ShoppingService { void addToCart(ShoppingCart cart, Product product, int quantity);
+public interface ShoppingService {
+    void addToCart(ShoppingCart cart, Product product, int quantity);
 
 
     void removeFromCart(ShoppingCart cart, Product product, int quantityToRemove);

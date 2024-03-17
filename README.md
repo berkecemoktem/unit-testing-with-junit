@@ -107,10 +107,10 @@ The tests comprehensively cover various scenarios and edge cases to ensure the r
 
 ## Code Coverage
 
-![](/Users/berkecemoktem/Desktop/code-coverage.png)
+![code-coverage-unittest](https://github.com/berkecemoktem/unit-testing-with-junit/assets/75270752/b6014397-8e75-42bc-a2df-0c02245401a1)
 
 NOTE: ‘Model’ and ‘Exception’ Layer classes are excluded in the test run configurations. Only the service classes have been targeted to be tested. You can see the class, method, and line coverage details in the above report.
 
 ## UML DIAGRAM
 
-![](/Users/berkecemoktem/Downloads/unitTestingUML.drawio.png)
+![unittesting-uml-updated drawio](https://github.com/berkecemoktem/unit-testing-with-junit/assets/75270752/1891d79b-1259-40d4-96c6-c160ab880814)
