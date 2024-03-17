@@ -1,23 +1,24 @@
+import lombok.NoArgsConstructor;
 import org.example.model.CustomerCredentials;
-import org.example.model.Product;
-import org.example.model.ShoppingCart;
 import org.example.service.CustomerCredentialsServiceImpl;
-import org.example.service.ShoppingServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 
 public class CustomerCredentialsServiceImplTest {
+    private String email;
+    private boolean expectedValidation;
 
     @InjectMocks
     private CustomerCredentialsServiceImpl credentialsService;
+
 
     @Before
     public void setUp() {
@@ -40,22 +41,27 @@ public class CustomerCredentialsServiceImplTest {
         assertFalse(result);
     }
 
+    @Parameterized.Parameters
+    public static Collection<Object[]> primeNumbers() {
+        return Arrays.asList(new Object[][]{
+                {"xx@gmail.com", true},
+                {"example@yahoo.com", false},
+                {"test@hotmail.com", true}
+        });
+    }
+
     @Test
     public void shouldValidateEmailFormat() {
         // Arrange
-        String validFormat = "xx@gmail.com";
-        String invalidFormat = "example@yahoo.com";
-        CustomerCredentials validCredentials = new CustomerCredentials(validFormat, "aa123");
-        CustomerCredentials invalidCredentials = new CustomerCredentials(invalidFormat, "aa123");
+        CustomerCredentials credentials = new CustomerCredentials(email, "password123");
 
         // Act
-        boolean validResult = credentialsService.isCustomerValid(validCredentials);
-        boolean invalidResult = credentialsService.isCustomerValid(invalidCredentials);
+        boolean result = credentialsService.isCustomerValid(credentials);
 
         // Assert
-        assertTrue(validResult);
-        assertFalse(invalidResult);
+        assertEquals(expectedValidation, result);
     }
+
 
     @Test
     public void shouldTestEncryptCredentials() {
