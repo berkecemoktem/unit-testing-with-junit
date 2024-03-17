@@ -40,15 +40,21 @@ public class CustomerCredentialsServiceImplTest {
         assertFalse(result);
     }
 
-    public void shouldValidateEmailFormat(String email, boolean expected) {
+    @Test
+    public void shouldValidateEmailFormat() {
         // Arrange
-        CustomerCredentials credentials = new CustomerCredentials(email, "password123");
+        String validFormat = "xx@gmail.com";
+        String invalidFormat = "example@yahoo.com";
+        CustomerCredentials validCredentials = new CustomerCredentials(validFormat, "aa123");
+        CustomerCredentials invalidCredentials = new CustomerCredentials(invalidFormat, "aa123");
 
         // Act
-        boolean result = credentialsService.isCustomerValid(credentials);
+        boolean validResult = credentialsService.isCustomerValid(validCredentials);
+        boolean invalidResult = credentialsService.isCustomerValid(invalidCredentials);
 
         // Assert
-        assertEquals(expected, result);
+        assertTrue(validResult);
+        assertFalse(invalidResult);
     }
 
     @Test
