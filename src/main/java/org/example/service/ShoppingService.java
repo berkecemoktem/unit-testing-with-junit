@@ -10,6 +10,8 @@ public interface ShoppingService {
 
     void removeFromCart(ShoppingCart cart, Product product, int quantityToRemove);
 
+    void removeFromCartMutated(ShoppingCart cart, Product product, int quantityToRemove);
+
     ShoppingCartItem getCartItemByName(ShoppingCart cart, String productName);
 
     double calculateTotal(ShoppingCart cart);

@@ -71,6 +71,49 @@ public class ShoppingServiceImpl implements ShoppingService{
         }
     }
 
+    /***************MUTATED CODES***************/
+    @Override
+    public void removeFromCartMutated(ShoppingCart cart, Product product, int quantityToRemove) {
+        // Mutation 1: Negating a condition
+        // Original condition: if (itemToRemove.isPresent())
+        // Mutated condition: if (!itemToRemove.isPresent())
+        Optional<ShoppingCartItem> itemToRemove = cart.getItems().stream()
+                .filter(item -> item.getProduct().equals(product))
+                .findFirst();
+
+        if (!itemToRemove.isPresent()) { // Mutation 1
+            throw new NoSuchElementException("Product not found in the cart.");
+        }
+
+        int existingQuantity = itemToRemove.get().getQuantity();
+
+        // Mutation 2: Changing a constant value
+        // Original error message: "Requested quantity exceeds the quantity of the product in the cart."
+        // Mutated error message: "Quantity requested is not valid."
+        if (quantityToRemove > existingQuantity) { // Mutation 2
+            throw new IllegalArgumentException("Quantity requested is not valid."); // Mutation 2
+        }
+
+        // Mutation 3: Removing a method call
+        // Original call: product.setStock(product.getStock() + quantityToRemove);
+        // Mutated code: Removed the call to product.setStock()
+        // product.setStock(product.getStock() + quantityToRemove); // Mutation 3
+
+        // Mutation 4: Changing the method call parameter
+        // Original call: itemToRemove.get().setQuantity(existingQuantity - quantityToRemove);
+        // Mutated code: itemToRemove.get().setQuantity(existingQuantity + quantityToRemove);
+        itemToRemove.get().setQuantity(existingQuantity + quantityToRemove); // Mutation 4
+
+        // Remove the item from the cart if its quantity becomes zero or less
+        if (itemToRemove.get().getQuantity() <= 0) {
+            cart.getItems().remove(itemToRemove.get());
+        }
+
+        System.out.println("Removed " + quantityToRemove + " '" + product.getName() + "' from the cart.");
+    }
+
+
+
     @Override
     public ShoppingCartItem getCartItemByName(ShoppingCart cart, String productName) {
         return cart.getItems().stream()
