@@ -23,12 +23,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 return true;
             }
             else {
-                System.out.println("Checkout failed.");
+                System.out.println("Checkout failed due to invalid credentials");
                 throw new CheckoutFailedException("Checkout failed due to invalid credentials");
             }
         }
         else {
-            System.out.println("Checkout failed.");
+            System.out.println("Checkout failed due to invalid cart");
             throw new CheckoutFailedException("Checkout failed due to invalid cart");
         }
     }
