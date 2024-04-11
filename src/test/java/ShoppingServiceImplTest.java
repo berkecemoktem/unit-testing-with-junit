@@ -125,12 +125,67 @@ public class ShoppingServiceImplTest {
 
         // Use assertThrows to check if the removeFromCart method throws an exception when the product is not found
         NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
-            shoppingService.removeFromCart(cart, tshirt, 1);
+            shoppingService.removeFromCartMutated(cart, tshirt, 1);
         });
 
         // Check the exception message
         assertEquals("Product not found in the cart.", exception.getMessage());
     }
+
+    /*******Test cases for mutation codes*******/
+
+    // Mutation 1: Negating a condition
+// Mutation 2: Changing a constant value
+    @Test
+    public void testRemoveFromCartMutated_Mutation1And2() {
+        // Arrange
+        ShoppingCart cart = new ShoppingCart();
+        Product exampleProduct = new Product("1", "example1", 20.0, 5);
+        ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 5, true);
+        cart.setItems(Collections.singletonList(item));
+
+        // Act & Assert
+        // The mutated method should throw an exception since the product is present in the cart,
+        // and the requested quantity exceeds the existing quantity
+        assertThrows(IllegalArgumentException.class, () -> shoppingService.removeFromCartMutated(cart, exampleProduct, 7));
+    }
+
+
+    @Test
+    public void testRemoveFromCartMutated_Mutation3() {
+        // Arrange
+        ShoppingCart cart = new ShoppingCart();
+        Product exampleProduct = new Product("1", "example1", 20.0, 5);
+        ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 5, true);
+        cart.setItems(Collections.singletonList(item));
+
+        // Act
+        shoppingService.removeFromCartMutated(cart, exampleProduct, 3);
+
+        // Assert
+        // Validate that the stock of the product is not updated after removing items
+        assertEquals(5, exampleProduct.getStock());
+    }
+
+    // Mutation 4: Changing the method call parameter
+    @Test
+    public void testRemoveFromCartMutated_Mutation4() {
+        // Arrange
+        ShoppingCart cart = new ShoppingCart();
+        Product exampleProduct = new Product("1", "example1", 20.0, 10);
+        ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 10, true);
+        cart.setItems(Collections.singletonList(item));
+
+        // Act
+        shoppingService.removeFromCartMutated(cart, exampleProduct, 3);
+
+        // Assert
+        // The mutated method should update the quantity by adding the requested quantity
+        assertEquals(13, item.getQuantity());
+    }
+
+
+    /********End of the mutation testing********/
 
     @Test
     public void shouldTestGetCartItemByNameWhenProductNotInCart() {
