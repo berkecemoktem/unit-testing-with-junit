@@ -13,6 +13,7 @@ public class Product {
     private String name;
     private double price;
     private int stock;
+    private double weight;
 
     @Override
     public boolean equals(Object o) {
