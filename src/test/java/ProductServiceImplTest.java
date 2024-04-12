@@ -18,11 +18,11 @@ public class ProductServiceImplTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {new Product("1", "Product 1", 100.0, 10), 10.0, 90.0},
-                {new Product("2", "Product 2", 50.0, 5), 20.0, 40.0},
-                {new Product("3", "Product 3", 75.0, 15), 25.0, 56.25},
-                {new Product("4", "Product 4", 200.0, 20), 15.0, 170.0},
-                {new Product("5", "Product 5", 80.0, 8), 5.0, 76.0}
+                {new Product("1", "Product 1", 100.0, 10, 10.0), 10.0, 90.0},
+                {new Product("2", "Product 2", 50.0, 5,10.0), 20.0, 40.0},
+                {new Product("3", "Product 3", 75.0, 15,10.0), 25.0, 56.25},
+                {new Product("4", "Product 4", 200.0, 20,10.0), 15.0, 170.0},
+                {new Product("5", "Product 5", 80.0, 8,20.0), 5.0, 76.0}
         });
     }
 
