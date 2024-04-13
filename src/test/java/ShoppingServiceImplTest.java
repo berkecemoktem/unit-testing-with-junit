@@ -33,7 +33,7 @@ public class ShoppingServiceImplTest {
 
     @Test
     public void shouldTestAddToCart() {
-        Product smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        Product smartphone = new Product("P002", "Smartphone", 499.99, 10,1.0);
 
         when(cart.getItems()).thenReturn(new ArrayList<>());
 
@@ -46,7 +46,7 @@ public class ShoppingServiceImplTest {
    @Test
     public void shouldTestAddToCartWhenProductExists() {
         ShoppingCart cart = new ShoppingCart();
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
+        Product laptop = new Product("L001", "Laptop", 999.99, 5,4.0);
         ShoppingCartItem existingItem = new ShoppingCartItem(laptop, 2, true);
         cart.setItems(Collections.singletonList(existingItem));
 
@@ -60,7 +60,7 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestAddToCartWhenQuantityInvalid() {
         ShoppingCart cart = new ShoppingCart();
-        Product tablet = new Product("T003", "Tablet", 299.99, 3);
+        Product tablet = new Product("T003", "Tablet", 299.99, 3,1.5);
 
         // Use assertThrows to check if the addToCart method throws IllegalArgumentException
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -75,8 +75,8 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestRemoveFromCart() {
         ShoppingCart cart = new ShoppingCart();
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
-        Product smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        Product laptop = new Product("L001", "Laptop", 999.99, 5,3.0);
+        Product smartphone = new Product("P002", "Smartphone", 499.99, 10,1.0);
 
         shoppingService.addToCart(cart, laptop, 3);
         shoppingService.addToCart(cart, smartphone, 2);
@@ -95,7 +95,7 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestRemoveFromCartWhenQuantityExceeds() {
         ShoppingCart cart = new ShoppingCart();
-        Product headphones = new Product("H001", "HeadphoneXQQ", 99.99, 11);
+        Product headphones = new Product("H001", "HeadphoneXQQ", 99.99, 11,0.5);
         shoppingService.addToCart(cart, headphones, 2);
 
         // Remove 3 headphones from the cart -> which is invalid since 3 > 2
@@ -112,8 +112,8 @@ public class ShoppingServiceImplTest {
         ShoppingCart cart = new ShoppingCart();
 
         // Add some products to the cart
-        Product exampleProduct1 = new Product("1", "example1", 20.0, 2);
-        Product exampleProduct2 = new Product("2", "example2", 15.0, 3);
+        Product exampleProduct1 = new Product("1", "example1", 20.0, 2,6.0);
+        Product exampleProduct2 = new Product("2", "example2", 15.0, 3,12.0);
 
         ShoppingCartItem item1 = new ShoppingCartItem(exampleProduct1, 2, true);
         ShoppingCartItem item2 = new ShoppingCartItem(exampleProduct2, 3, true);
@@ -121,7 +121,7 @@ public class ShoppingServiceImplTest {
         cart.setItems(Arrays.asList(item1, item2));
 
         // Create a product not present in the cart
-        Product tshirt = new Product("T001", "DesignerX", 19.99, 200);
+        Product tshirt = new Product("T001", "DesignerX", 19.99, 200,5.0);
 
         // Use assertThrows to check if the removeFromCart method throws an exception when the product is not found
         NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
@@ -140,7 +140,7 @@ public class ShoppingServiceImplTest {
     public void testRemoveFromCartMutated_Mutation1And2() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
-        Product exampleProduct = new Product("1", "example1", 20.0, 5);
+        Product exampleProduct = new Product("1", "example1", 20.0, 5,14.0);
         ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 5, true);
         cart.setItems(Collections.singletonList(item));
 
@@ -155,7 +155,7 @@ public class ShoppingServiceImplTest {
     public void testRemoveFromCartMutated_Mutation3() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
-        Product exampleProduct = new Product("1", "example1", 20.0, 5);
+        Product exampleProduct = new Product("1", "example1", 20.0, 5,11.0);
         ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 5, true);
         cart.setItems(Collections.singletonList(item));
 
@@ -172,7 +172,7 @@ public class ShoppingServiceImplTest {
     public void testRemoveFromCartMutated_Mutation4() {
         // Arrange
         ShoppingCart cart = new ShoppingCart();
-        Product exampleProduct = new Product("1", "example1", 20.0, 10);
+        Product exampleProduct = new Product("1", "example1", 20.0, 10,10.0);
         ShoppingCartItem item = new ShoppingCartItem(exampleProduct, 10, true);
         cart.setItems(Collections.singletonList(item));
 
@@ -203,8 +203,8 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestCalculateTotalForItemsInCart() {
         ShoppingCart cart = new ShoppingCart();
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
-        Product smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        Product laptop = new Product("L001", "Laptop", 999.99, 5,0.7);
+        Product smartphone = new Product("P002", "Smartphone", 499.99, 10,0.4);
 
         shoppingService.addToCart(cart, laptop, 2);
         shoppingService.addToCart(cart, smartphone, 3);
@@ -224,7 +224,7 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestValidateValidCart() {
         ShoppingCart cart = new ShoppingCart();
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
+        Product laptop = new Product("L001", "Laptop", 999.99, 5,2.0);
         shoppingService.addToCart(cart, laptop, 3);
 
         boolean isValid = shoppingService.validateCart(cart);
@@ -234,8 +234,8 @@ public class ShoppingServiceImplTest {
     @Test
     public void shouldTestValidateInvalidCart() {
         ShoppingCart cart = new ShoppingCart();
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
-        Product smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        Product laptop = new Product("L001", "Laptop", 999.99, 5,1.5);
+        Product smartphone = new Product("P002", "Smartphone", 499.99, 10,2.0);
         shoppingService.addToCart(cart, laptop, 3);
         shoppingService.addToCart(cart, smartphone, 8);
 
@@ -251,8 +251,8 @@ public class ShoppingServiceImplTest {
         ShoppingServiceImpl shoppingService = new ShoppingServiceImpl();
 
         // Add items to the cart
-        Product laptop = new Product("L001", "Laptop", 999.99, 5);
-        Product smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        Product laptop = new Product("L001", "Laptop", 999.99, 50,0.5);
+        Product smartphone = new Product("P002", "Smartphone", 499.99, 10,0.4);
         shoppingService.addToCart(cart, laptop, 2);
         shoppingService.addToCart(cart, smartphone, 3);
 

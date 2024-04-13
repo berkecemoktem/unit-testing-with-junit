@@ -24,8 +24,8 @@ public class Main {
         customerCredentialsService.encryptCredentials(credentials);
 
         //Instantiate necessary objects and services
-        laptop = new Product("P001", "Laptop", 999.99, 5);
-        smartphone = new Product("P002", "Smartphone", 499.99, 10);
+        laptop = new Product("P001", "Laptop", 999.99, 5,5.0);
+        smartphone = new Product("P002", "Smartphone", 499.99, 10, 1.0);
 
         shoppingService = new ShoppingServiceImpl();
         shoppingCartService = new ShoppingCartServiceImpl(shoppingService, customerCredentialsService);
