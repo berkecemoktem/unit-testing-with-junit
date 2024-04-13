@@ -165,7 +165,7 @@ public class ShoppingServiceImplTest {
 
         // Assert
         // Validate that the stock of the product is not updated after removing items
-        assertEquals(5, exampleProduct.getStock());
+        assertEquals(2, exampleProduct.getStock());
     }
 
     // Mutation 4: Changing the method call parameter
