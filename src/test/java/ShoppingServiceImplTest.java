@@ -72,6 +72,7 @@ public class ShoppingServiceImplTest {
     }
 
 
+    //Original test method before the mutated version.
     @Test
     public void shouldTestRemoveFromCart() {
         ShoppingCart cart = new ShoppingCart();
@@ -125,7 +126,7 @@ public class ShoppingServiceImplTest {
 
         // Use assertThrows to check if the removeFromCart method throws an exception when the product is not found
         NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
-            shoppingService.removeFromCartMutated(cart, tshirt, 1);
+            shoppingService.removeFromCart(cart, tshirt, 1);
         });
 
         // Check the exception message
@@ -135,7 +136,7 @@ public class ShoppingServiceImplTest {
     /*******Test cases for mutation codes*******/
 
     // Mutation 1: Negating a condition
-// Mutation 2: Changing a constant value
+    // Mutation 2: Changing a constant value
     @Test
     public void testRemoveFromCartMutated_Mutation1And2() {
         // Arrange
@@ -150,7 +151,7 @@ public class ShoppingServiceImplTest {
         assertThrows(IllegalArgumentException.class, () -> shoppingService.removeFromCartMutated(cart, exampleProduct, 7));
     }
 
-
+    //Mutation 3:
     @Test
     public void testRemoveFromCartMutated_Mutation3() {
         // Arrange
