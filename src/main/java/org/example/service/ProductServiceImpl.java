@@ -30,10 +30,12 @@ public class ProductServiceImpl implements ProductService{
     }
 
     //M = E - N + 2P
-    /*where E = the number of edges in the control flow graph
+    /*
+    where E = the number of edges in the control flow graph
     N = the number of nodes in the control flow graph
-    P = the number of connected components */
+    P = the number of connected components
+    */
 
-    //Result = 13 - 11 + 2 = 4
+    //Result = 4
 
 }
